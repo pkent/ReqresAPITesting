@@ -1,0 +1,1074 @@
+{
+	"id": "73e11755-8f39-4985-a5e4-37508a88d7ea",
+	"name": "Reqres API",
+	"timestamp": "2021-05-19T19:34:33.506Z",
+	"collection_id": "dbda42e7-a334-452f-9304-4ee4c7d8c130",
+	"folder_id": 0,
+	"environment_id": "914203aa-4c83-4752-8f79-9297bfb16fe1",
+	"totalPass": 76,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "8786d3de-7477-4d08-a6c2-24c60530ef1b",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 675,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response Content-Type header contains application/json": true,
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Response Content-Type header contains application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				675
+			],
+			"allTests": [
+				{
+					"Response Content-Type header contains application/json": true,
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "5c49c6b7-18a4-469d-87eb-a56bc7be15cb",
+			"name": "Get existing user",
+			"url": "https://reqres.in/api/users/1",
+			"time": 635,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Response Content-Type header contains application/json": true,
+				"Status code is 200": true,
+				"Reponse data returned is valid json data with entity id": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type header contains application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned is valid json data with entity id": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				635
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Response Content-Type header contains application/json": true,
+					"Status code is 200": true,
+					"Reponse data returned is valid json data with entity id": true
+				}
+			]
+		},
+		{
+			"id": "5bd124fd-434c-4b62-9d66-3376cabc0004",
+			"name": "Get existing single user with delay response parameter",
+			"url": "https://reqres.in/api/users/1?delay=2",
+			"time": 2627,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Response Content-Type header contains application/json": true,
+				"Status code is 200": true,
+				"Reponse data returned is valid json data with entity id": true,
+				"Reponse time is greater than delay of 2 seconds": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type header contains application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned is valid json data with entity id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse time is greater than delay of 2 seconds": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2627
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Response Content-Type header contains application/json": true,
+					"Status code is 200": true,
+					"Reponse data returned is valid json data with entity id": true,
+					"Reponse time is greater than delay of 2 seconds": true
+				}
+			]
+		},
+		{
+			"id": "a47eb2aa-3261-49a0-9ab6-c3127a35f217",
+			"name": "Get user that does not exist",
+			"url": "https://reqres.in/api/users/200",
+			"time": 635,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Response Content-Type header contains application/json": true,
+				"Status code is 404 Not Found": true,
+				"Reponse data returned contains no data": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type header contains application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404 Not Found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned contains no data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				635
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Response Content-Type header contains application/json": true,
+					"Status code is 404 Not Found": true,
+					"Reponse data returned contains no data": true
+				}
+			]
+		},
+		{
+			"id": "1032e5de-cb91-4254-8c0e-2298f97c9404",
+			"name": "Get user using invalid user Id",
+			"url": "https://reqres.in/api/users/invalid_id_here",
+			"time": 643,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Response Content-Type header contains application/json": true,
+				"Status code is 404 Not Found": true,
+				"Reponse data returned contains no data": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Content-Type header contains application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404 Not Found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned contains no data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				643
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Response Content-Type header contains application/json": true,
+					"Status code is 404 Not Found": true,
+					"Reponse data returned contains no data": true
+				}
+			]
+		},
+		{
+			"id": "07dce5d3-017f-4cf1-b678-f617998f888d",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 650,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				650
+			],
+			"allTests": [
+				{
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "235a783f-d927-4900-b3a6-74042a859c3f",
+			"name": "Update existing user",
+			"url": "https://reqres.in/api/users/1",
+			"time": 634,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data contains updatedAt timestamp": true,
+				"JSON response returned contains the data that was originally posted to the endpoint": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data contains updatedAt timestamp": {
+					"pass": 1,
+					"fail": 0
+				},
+				"JSON response returned contains the data that was originally posted to the endpoint": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				634
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data contains updatedAt timestamp": true,
+					"JSON response returned contains the data that was originally posted to the endpoint": true
+				}
+			]
+		},
+		{
+			"id": "ac2c3a99-2f68-48a7-bcab-68184730ff19",
+			"name": "Update non-existing user",
+			"url": "https://reqres.in/api/users/2000",
+			"time": 612,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data contains updatedAt timestamp": true,
+				"JSON response returned contains the data that was originally posted to the endpoint": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data contains updatedAt timestamp": {
+					"pass": 1,
+					"fail": 0
+				},
+				"JSON response returned contains the data that was originally posted to the endpoint": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				612
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data contains updatedAt timestamp": true,
+					"JSON response returned contains the data that was originally posted to the endpoint": true
+				}
+			]
+		},
+		{
+			"id": "3be1f921-35cf-48dd-9353-a92456b88f3d",
+			"name": "Update User containing invalid body",
+			"url": "https://reqres.in/api/users/1",
+			"time": 341,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data contains updatedAt timestamp": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data contains updatedAt timestamp": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				341
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data contains updatedAt timestamp": true
+				}
+			]
+		},
+		{
+			"id": "b0699b0d-3ab4-4ac9-88f7-14483bc7617a",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 622,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				622
+			],
+			"allTests": [
+				{
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "e8dcf8b8-9c8d-42c1-8c96-e0877530b7da",
+			"name": "Delete existing user",
+			"url": "https://reqres.in/api/users/1",
+			"time": 643,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 204": true,
+				"Response body is empty": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				643
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 204": true,
+					"Response body is empty": true
+				}
+			]
+		},
+		{
+			"id": "be21b511-96e0-430e-900f-7baa5e61a18d",
+			"name": "Delete custom entity",
+			"url": "https://reqres.in/api/documents/1",
+			"time": 621,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 204": true,
+				"Response body is empty": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				621
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 204": true,
+					"Response body is empty": true
+				}
+			]
+		},
+		{
+			"id": "72f33f7e-6650-4889-a51c-88f47187b155",
+			"name": "Delete users without specifying Id",
+			"url": "https://reqres.in/api/users",
+			"time": 624,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 204": true,
+				"Response body is empty": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				624
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 204": true,
+					"Response body is empty": true
+				}
+			]
+		},
+		{
+			"id": "f7045420-8fa4-4d1f-b8af-7fd45553e585",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 660,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				660
+			],
+			"allTests": [
+				{
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "a272bef1-3aef-4091-9f68-94372ac56676",
+			"name": "Create user",
+			"url": "https://reqres.in/api/users",
+			"time": 358,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"User created successfully with status code 201": true,
+				"Id of the user returned and is a valid integer greater than 0": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User created successfully with status code 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Id of the user returned and is a valid integer greater than 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				358
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"User created successfully with status code 201": true,
+					"Id of the user returned and is a valid integer greater than 0": true
+				}
+			]
+		},
+		{
+			"id": "0256bb75-a1ad-4147-bba8-73b7d3e395a5",
+			"name": "Create document - with valid data",
+			"url": "https://reqres.in/api/documents",
+			"time": 331,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Id of the document is returned and is a valid integer greater than 0": true,
+				"JSON response returned contains the data that was originally posted to the endpoint": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Id of the document is returned and is a valid integer greater than 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"JSON response returned contains the data that was originally posted to the endpoint": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				331
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Id of the document is returned and is a valid integer greater than 0": true,
+					"JSON response returned contains the data that was originally posted to the endpoint": true
+				}
+			]
+		},
+		{
+			"id": "b9155fa7-9298-4279-9c4f-04b3c90959b7",
+			"name": "Create document - post invalid data",
+			"url": "https://reqres.in/api/documents",
+			"time": 346,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Returns status 201 when document created successfully": true,
+				"Id of the document is returned and is a valid integer greater than 0": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Returns status 201 when document created successfully": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Id of the document is returned and is a valid integer greater than 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				346
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Returns status 201 when document created successfully": true,
+					"Id of the document is returned and is a valid integer greater than 0": true
+				}
+			]
+		},
+		{
+			"id": "a5f98dba-cf6e-46e6-9c54-75cb54b59a38",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 621,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				621
+			],
+			"allTests": [
+				{
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "8a1e8cdf-759a-4779-ab86-696d90d09b62",
+			"name": "Get documents",
+			"url": "https://reqres.in/api/documents?page=1",
+			"time": 628,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data returned contains an array of items in data object": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned contains an array of items in data object": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				628
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data returned contains an array of items in data object": true
+				}
+			]
+		},
+		{
+			"id": "56965b48-d1e1-4b3c-8055-883d544b3d15",
+			"name": "Delete document",
+			"url": "https://reqres.in/api/documents/1",
+			"time": 648,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 204": true,
+				"Response body is empty": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				648
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 204": true,
+					"Response body is empty": true
+				}
+			]
+		},
+		{
+			"id": "69148182-d024-494d-956a-1c6ee87f4354",
+			"name": "Login",
+			"url": "https://reqres.in/api/login",
+			"time": 330,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login status code is 200": true,
+				"Token is returned after login": true
+			},
+			"testPassFailCounts": {
+				"Login status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is returned after login": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				330
+			],
+			"allTests": [
+				{
+					"Login status code is 200": true,
+					"Token is returned after login": true
+				}
+			]
+		},
+		{
+			"id": "89998439-0c51-4cfa-a888-d46e0ba01690",
+			"name": "Get logged in user details",
+			"url": "https://reqres.in/api/users/1",
+			"time": 613,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data returned is valid json data with entity id": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data returned is valid json data with entity id": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				613
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data returned is valid json data with entity id": true
+				}
+			]
+		},
+		{
+			"id": "09674453-7d55-46d8-8185-310647aa511d",
+			"name": "Create new document",
+			"url": "https://reqres.in/api/documents",
+			"time": 332,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Returns status 201 when document created successfully": true,
+				"Id of the document is returned and is a valid integer greater than 0": true,
+				"JSON response returned contains the data that was originally posted to the endpoint": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Returns status 201 when document created successfully": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Id of the document is returned and is a valid integer greater than 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"JSON response returned contains the data that was originally posted to the endpoint": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				332
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Returns status 201 when document created successfully": true,
+					"Id of the document is returned and is a valid integer greater than 0": true,
+					"JSON response returned contains the data that was originally posted to the endpoint": true
+				}
+			]
+		},
+		{
+			"id": "987ea5d7-0fc7-43f2-88b4-bdba39663fc7",
+			"name": "Update existing document",
+			"url": "https://reqres.in/api/document/472",
+			"time": 623,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Bearer token is in the request header": true,
+				"Status code is 200": true,
+				"Reponse data contains updatedAt timestamp": true,
+				"JSON response returned contains the data that was originally posted to the endpoint": true
+			},
+			"testPassFailCounts": {
+				"Bearer token is in the request header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reponse data contains updatedAt timestamp": {
+					"pass": 1,
+					"fail": 0
+				},
+				"JSON response returned contains the data that was originally posted to the endpoint": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				623
+			],
+			"allTests": [
+				{
+					"Bearer token is in the request header": true,
+					"Status code is 200": true,
+					"Reponse data contains updatedAt timestamp": true,
+					"JSON response returned contains the data that was originally posted to the endpoint": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 15452,
+	"collection": {
+		"requests": [
+			{
+				"id": "8786d3de-7477-4d08-a6c2-24c60530ef1b",
+				"method": "POST"
+			},
+			{
+				"id": "5c49c6b7-18a4-469d-87eb-a56bc7be15cb",
+				"method": "GET"
+			},
+			{
+				"id": "5bd124fd-434c-4b62-9d66-3376cabc0004",
+				"method": "GET"
+			},
+			{
+				"id": "a47eb2aa-3261-49a0-9ab6-c3127a35f217",
+				"method": "GET"
+			},
+			{
+				"id": "1032e5de-cb91-4254-8c0e-2298f97c9404",
+				"method": "GET"
+			},
+			{
+				"id": "07dce5d3-017f-4cf1-b678-f617998f888d",
+				"method": "POST"
+			},
+			{
+				"id": "235a783f-d927-4900-b3a6-74042a859c3f",
+				"method": "PUT"
+			},
+			{
+				"id": "ac2c3a99-2f68-48a7-bcab-68184730ff19",
+				"method": "PUT"
+			},
+			{
+				"id": "3be1f921-35cf-48dd-9353-a92456b88f3d",
+				"method": "PUT"
+			},
+			{
+				"id": "b0699b0d-3ab4-4ac9-88f7-14483bc7617a",
+				"method": "POST"
+			},
+			{
+				"id": "e8dcf8b8-9c8d-42c1-8c96-e0877530b7da",
+				"method": "DELETE"
+			},
+			{
+				"id": "be21b511-96e0-430e-900f-7baa5e61a18d",
+				"method": "DELETE"
+			},
+			{
+				"id": "72f33f7e-6650-4889-a51c-88f47187b155",
+				"method": "DELETE"
+			},
+			{
+				"id": "f7045420-8fa4-4d1f-b8af-7fd45553e585",
+				"method": "POST"
+			},
+			{
+				"id": "a272bef1-3aef-4091-9f68-94372ac56676",
+				"method": "POST"
+			},
+			{
+				"id": "0256bb75-a1ad-4147-bba8-73b7d3e395a5",
+				"method": "POST"
+			},
+			{
+				"id": "b9155fa7-9298-4279-9c4f-04b3c90959b7",
+				"method": "POST"
+			},
+			{
+				"id": "a5f98dba-cf6e-46e6-9c54-75cb54b59a38",
+				"method": "POST"
+			},
+			{
+				"id": "8a1e8cdf-759a-4779-ab86-696d90d09b62",
+				"method": "GET"
+			},
+			{
+				"id": "56965b48-d1e1-4b3c-8055-883d544b3d15",
+				"method": "DELETE"
+			},
+			{
+				"id": "69148182-d024-494d-956a-1c6ee87f4354",
+				"method": "POST"
+			},
+			{
+				"id": "89998439-0c51-4cfa-a888-d46e0ba01690",
+				"method": "GET"
+			},
+			{
+				"id": "09674453-7d55-46d8-8185-310647aa511d",
+				"method": "POST"
+			},
+			{
+				"id": "987ea5d7-0fc7-43f2-88b4-bdba39663fc7",
+				"method": "PUT"
+			}
+		]
+	}
+}

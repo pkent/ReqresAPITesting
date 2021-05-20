@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "dbda42e7-a334-452f-9304-4ee4c7d8c130",
+		"name": "Reqres API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned is valid json data with entity id\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(parseInt(response.data.id)).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get existing single user with delay response parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned is valid json data with entity id\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(parseInt(response.data.id)).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse time is greater than delay of 2 seconds\", () => {\r",
+									"    pm.expect(pm.response.responseTime).is.greaterThan(2000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/1?delay=2",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							],
+							"query": [
+								{
+									"key": "delay",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user that does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 Not Found\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned contains no data\", () => {\r",
+									"    pm.expect(pm.response.json()).to.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/200",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"200"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user using invalid user Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 Not Found\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned contains no data\", () => {\r",
+									"    pm.expect(pm.response.json()).to.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/invalid_id_here",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"invalid_id_here"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response Content-Type header contains application/json\", () => {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Update User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"JSON response returned contains the data that was originally posted to the endpoint\", () => {\r",
+									"    var expectedObject = JSON.parse(pm.variables.get(\"dataOriginallyPostedToEndpoint\"));\r",
+									"    pm.expect(pm.response.json()).to.deep.include(expectedObject);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"    first_name: \"Paul\",\r",
+									"    last_name: \"Kent\"\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{dataOriginallyPostedToEndpoint}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/users/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update non-existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// NOTE: This API accepts any Id to be posted as it does not persist any of the data posted.\r",
+									"// The tests below assume that the current behaviour of the reqres API is the expected behaviour.\r",
+									"// This is not normally the case with a real business application!\r",
+									"\r",
+									"pm.test(\"JSON response returned contains the data that was originally posted to the endpoint\", () => {\r",
+									"    var expectedObject = JSON.parse(pm.variables.get(\"dataOriginallyPostedToEndpoint\"));\r",
+									"    pm.expect(pm.response.json()).to.deep.include(expectedObject);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{dataOriginallyPostedToEndpoint}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/users/2000",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User containing invalid body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// NOTE: The design of this API seems to accept any Id and any data to be posted without\r",
+									"// any error as it does not persist any data.\r",
+									"\r",
+									"// The tests below assume that the current behaviour of the reqres API is the expected behaviour.\r",
+									"// This is not normally the case with a real business application! A real application would return \r",
+									"// an error!\r",
+									"\r",
+									"// Tests for this request are on parent folder for re-usability"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "this is plain text request body",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/users/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Attempting to re-use tests for multiple requests, except the login",
+							"",
+							"if (pm.info.requestName !== \"Login\") {",
+							"    pm.test(\"Status code is 200\", () => {",
+							"        pm.response.to.have.status(200);",
+							"    });",
+							"",
+							"    pm.test(\"Reponse data contains updatedAt timestamp\", () => {",
+							"        const response = pm.response.json();",
+							"        const updatedAt = Date.parse(response.updatedAt);",
+							"        //console.log(updatedAt);",
+							"        pm.expect(updatedAt).to.be.a(\"number\");",
+							"    });",
+							"}",
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Delete User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete existing user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is empty\", () => {\r",
+									"    pm.expect(pm.response.responseSize).to.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete custom entity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is empty\", () => {\r",
+									"    pm.expect(pm.response.responseSize).to.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/documents/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete users without specifying Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// A real business application should probably not allow this request without specifying an Id\r",
+									"\r",
+									"pm.test(\"Status code is 204\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is empty\", () => {\r",
+									"    pm.expect(pm.response.responseSize).to.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Entities",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"User created successfully with status code 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Id of the user returned and is a valid integer greater than 0\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(parseInt(response.id)).to.be.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/users",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create document - with valid data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"    name: \"Sample Document 1\",\r",
+									"    creator: \"Paul Kent\",\r",
+									"    keywords: [\"API testing\", \"Postman\", \"Test Plan\"]\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Id of the document is returned and is a valid integer greater than 0\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(parseInt(response.id)).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON response returned contains the data that was originally posted to the endpoint\", () => {\r",
+									"    var expectedObject = JSON.parse(pm.variables.get(\"dataOriginallyPostedToEndpoint\"));\r",
+									"    pm.expect(pm.response.json()).to.deep.include(expectedObject);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{dataOriginallyPostedToEndpoint}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/documents",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create document - post invalid data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"    name: \"Sample Document 1\",\r",
+									"    creator: \"Paul Kent\",\r",
+									"    keywords: [\"API testing\", \"Postman\", \"Test Plan\"]\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// The endpoint creates a new document no matter what is posted to it!\r",
+									"\r",
+									"pm.test(\"Returns status 201 when document created successfully\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Id of the document is returned and is a valid integer greater than 0\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(parseInt(response.id)).to.be.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "this body is invalid as it is not json",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/documents",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Delete - End2End",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get documents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned contains an array of items in data object\", () => {\r",
+									"    pm.expect(response.data.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.variables.set(\"document_to_delete\", response.data[0].id.toString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/documents?page=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is empty\", () => {\r",
+									"    pm.expect(pm.response.responseSize).to.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/documents/{{document_to_delete}}",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents",
+								"{{document_to_delete}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document Creation - End2End",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is returned after login\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"token\");\r",
+									"\r",
+									"    const token = response[\"token\"];\r",
+									"    pm.collectionVariables.set(\"bearer_token\", token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged in user details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data returned is valid json data with entity id\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(parseInt(response.data.id)).to.be.greaterThan(0);\r",
+									"    pm.variables.set(\"current_user_data\", JSON.stringify(response.data));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/users/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new document",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"    name: \"Sample Document 1\",\r",
+									"    keywords: [\"API testing\", \"Postman\", \"Test Plan\"]\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Returns status 201 when document created successfully\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Id of the document is returned and is a valid integer greater than 0\", () => {\r",
+									"    const docId = parseInt(response.id);\r",
+									"    pm.expect(docId).to.be.greaterThan(0);\r",
+									"    pm.variables.set(\"new_document_id\", docId.toString());\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON response returned contains the data that was originally posted to the endpoint\", () => {\r",
+									"    const dataOriginallyPostedToEndpoint = JSON.parse(pm.variables.get(\"dataOriginallyPostedToEndpoint\"));\r",
+									"    console.log(dataOriginallyPostedToEndpoint);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{dataOriginallyPostedToEndpoint}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/documents",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update existing document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Reponse data contains updatedAt timestamp\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    const updatedAt = Date.parse(response.updatedAt);\r",
+									"    //console.log(updatedAt);\r",
+									"    pm.expect(updatedAt).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"JSON response returned contains the data that was originally posted to the endpoint\", () => {\r",
+									"    var expectedObject = JSON.parse(pm.variables.get(\"dataOriginallyPostedToEndpoint\"));\r",
+									"    pm.expect(pm.response.json()).to.deep.include(expectedObject);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const requestBodyDataObj = {\r",
+									"    name: \"Updated Document Name\",\r",
+									"    keywords: [\"API testing\", \"Postman\", \"Test Plan\"]\r",
+									"};\r",
+									"\r",
+									"// This object will be sent in the request and checked in the response\r",
+									"pm.variables.set(\"dataOriginallyPostedToEndpoint\", JSON.stringify(requestBodyDataObj));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{dataOriginallyPostedToEndpoint}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/document/{{new_document_id}}",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"document",
+								"{{new_document_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if (pm.info.requestName !== \"Login\") {",
+					"    pm.test(\"Bearer token is in the request header\", () => {",
+					"        pm.expect(pm.request.headers.get(\"Authorization\")).to.exist;",
+					"    });",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer_token",
+			"value": ""
+		}
+	]
+}
